@@ -8,19 +8,25 @@ import '../node_modules/basiclightbox/dist/basicLightbox.min.css';
 import './style.css';
 
 const refForm = document.querySelector('#search-form');
-const refGalleryList = document.querySelector('.gallery__list');
 const refGallery = document.querySelector('.gallery');
 const refBtn = document.querySelector('.btn__load-more');
 const refScrollUp = document.querySelector('.scrollup');
 
 const newImage = new FetchImages();
+
 let currentSearchValue = '';
+refBtn.style.visibility = 'hidden';
+refScrollUp.style.display = 'none';
+const options = {
+  root: null,
+  rootMargin: '0px',
+  threshold: 0.5,
+};
 
 refForm.addEventListener('submit', makeGallery);
 refBtn.addEventListener('click', addImagesAndScroll);
-refGalleryList.addEventListener('click', openImgInModal);
+refGallery.addEventListener('click', openImgInModal);
 refScrollUp.addEventListener('click', topFunction);
-refBtn.style.visibility = 'hidden';
 
 function makeGallery(e) {
   e.preventDefault();
@@ -37,7 +43,7 @@ function getQueryFromInput(e) {
 
 function addImagestoGallery() {
   newImage.fetchImage().then(data => {
-    refGalleryList.innerHTML = createCard(data.hits);
+    refGallery.innerHTML = createCard(data.hits);
     if (data.hits.length > 11) {
       refBtn.style.visibility = 'visible';
     }
@@ -46,11 +52,13 @@ function addImagestoGallery() {
 
 function addImagesAndScroll() {
   newImage.fetchImage().then(data => {
-    refGalleryList.insertAdjacentHTML('beforeend', createCard(data.hits));
-    refGallery.scrollIntoView({
-      behavior: 'smooth',
-      block: 'end',
-    });
+    refGallery.insertAdjacentHTML('beforeend', createCard(data.hits));
+   
+    //
+    // refGallery.scrollIntoView({
+    //   behavior: 'smooth',
+    //   block: 'end',
+    // });
   });
 }
 
@@ -63,3 +71,20 @@ function openImgInModal(e) {
 `);
   instance.show();
 }
+
+window.onscroll = function () {
+  scrollFunction();
+};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+    refScrollUp.style.display = 'block';
+  } else {
+    refScrollUp.style.display = 'none';
+  }
+}
+
+//  if (newImage.page > 1) {
+   const observer = new IntersectionObserver(addImagesAndScroll, options);
+   observer.observe(refBtn);
+//  }

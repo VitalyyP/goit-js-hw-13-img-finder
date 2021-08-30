@@ -17,7 +17,7 @@ img {
   margin: 0 auto;
 }
 
-.gallery__list {
+.gallery {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
