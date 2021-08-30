@@ -1,0 +1,72 @@
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: lightgrey;
+}
+
+img {
+  display: block;
+  width: 250px;
+  height: 160px;
+}
+
+.container {
+  width: 1200px;
+  margin: 0 auto;
+}
+
+.gallery__list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 0;
+  list-style: none;
+}
+
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  font-size: 10px;
+}
+
+.scrollup:hover {
+  transform: scale(1.2);
+  outline: none;
+
+  -webkit-tap-highlight-color: rgba(255, 255, 255, 0) !important;
+  -webkit-focus-ring-color: rgba(255, 255, 255, 0) !important;
+  outline: none !important;
+}
+
+.scrollup {
+  position: fixed;
+  z-index: 2;
+
+  width: 40px;
+  height: 40px;
+  background-color: rgb(239, 239, 239);
+
+  right: 10px;
+  bottom: 100px;
+
+
+  padding: 5px;
+
+  cursor: pointer;
+  border-radius: 50%;
+  text-align: center;
+  opacity: 1;
+  box-shadow: 0px 4px 4px rgba(171, 129, 108, 0.25);
+
+  transition: transform 300ms ease-in-out;
+}
+
+.scrollup__icon {
+  fill: black;
+  width: 30px;
+  height: 30px;
+}
