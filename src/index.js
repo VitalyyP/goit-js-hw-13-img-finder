@@ -54,11 +54,12 @@ function addImagesAndScroll() {
   newImage.fetchImage().then(data => {
     refGallery.insertAdjacentHTML('beforeend', createCard(data.hits));
    
-    //
-    // refGallery.scrollIntoView({
-    //   behavior: 'smooth',
-    //   block: 'end',
-    // });
+    console.log(newImage.page);
+     if (newImage.page === 3) {
+       const observer = new IntersectionObserver(addImagesAndScroll, options);
+       observer.observe(refBtn);
+     }
+   
   });
 }
 
@@ -84,7 +85,3 @@ function scrollFunction() {
   }
 }
 
-//  if (newImage.page === 2) {
-   const observer = new IntersectionObserver(addImagesAndScroll, options);
-   observer.observe(refBtn);
-//  }
