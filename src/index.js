@@ -84,7 +84,7 @@ function scrollFunction() {
   }
 }
 
-//  if (newImage.page > 1) {
+//  if (newImage.page === 2) {
    const observer = new IntersectionObserver(addImagesAndScroll, options);
    observer.observe(refBtn);
 //  }
